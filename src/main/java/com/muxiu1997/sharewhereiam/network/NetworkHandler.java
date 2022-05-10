@@ -1,9 +1,10 @@
-package com.muxiu1997.sharewhereiam;
+package com.muxiu1997.sharewhereiam.network;
 
 
-import com.muxiu1997.sharewhereiam.packet.IPacket;
-import com.muxiu1997.sharewhereiam.packet.PacketShareWaypoint;
-import com.muxiu1997.sharewhereiam.packet.PacketStartShareWaypoint;
+import com.muxiu1997.sharewhereiam.Tags;
+import com.muxiu1997.sharewhereiam.network.packet.IPacket;
+import com.muxiu1997.sharewhereiam.network.packet.PacketShareWaypoint;
+import com.muxiu1997.sharewhereiam.network.packet.PacketStartShareWaypoint;
 import com.muxiu1997.sharewhereiam.util.ChatShareWaypoint;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -14,8 +15,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 
 
 public class NetworkHandler {

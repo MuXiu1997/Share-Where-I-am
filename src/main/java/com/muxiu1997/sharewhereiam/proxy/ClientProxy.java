@@ -1,4 +1,4 @@
-package com.muxiu1997.sharewhereiam;
+package com.muxiu1997.sharewhereiam.proxy;
 
 import com.muxiu1997.sharewhereiam.command.CommandSaveWaypoint;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;

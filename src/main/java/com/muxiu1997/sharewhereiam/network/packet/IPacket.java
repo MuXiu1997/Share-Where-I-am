@@ -1,4 +1,4 @@
-package com.muxiu1997.sharewhereiam.packet;
+package com.muxiu1997.sharewhereiam.network.packet;
 
 import io.netty.buffer.ByteBuf;
 

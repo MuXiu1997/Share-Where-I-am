@@ -1,7 +1,7 @@
 package com.muxiu1997.sharewhereiam.mixins.journeymap;
 
-import com.muxiu1997.sharewhereiam.NetworkHandler;
-import com.muxiu1997.sharewhereiam.packet.PacketStartShareWaypoint;
+import com.muxiu1997.sharewhereiam.network.NetworkHandler;
+import com.muxiu1997.sharewhereiam.network.packet.PacketStartShareWaypoint;
 import journeymap.client.Constants;
 import journeymap.client.model.Waypoint;
 import journeymap.client.ui.component.Button;

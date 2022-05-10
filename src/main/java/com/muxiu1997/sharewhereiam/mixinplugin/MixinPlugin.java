@@ -30,8 +30,9 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public List<String> getMixins() {
-        final List<String> mixins = new ArrayList<>(1);
+        final List<String> mixins = new ArrayList<>(2);
         mixins.add("journeymap.MixinWaypointManagerItem");
+        mixins.add("journeymap.MixinWaypointStore");
         return mixins;
     }
 

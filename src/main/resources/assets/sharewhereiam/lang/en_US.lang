@@ -1,2 +1,11 @@
 jm.waypoint.share=Share
-command.savewaypoint.usage=Usage: /savewaypoint <waypoint code>
+
+sharewhereiam.command.savewaypoint.usage=Usage: /savewaypoint <waypoint code> [neet to open editor? default: true]
+sharewhereiam.command.savewaypoint.success=Waypoint saved
+sharewhereiam.command.savewaypoint.exists=Waypoint exists, can't save
+
+sharewhereiam.chat.sharewaypoint.sharedawaypoint=shared a waypoint:
+sharewhereiam.chat.sharewaypoint.SAVE=SAVE
+sharewhereiam.chat.sharewaypoint.SAVE.desc=Save this waypoint to your JourneyMap
+sharewhereiam.chat.sharewaypoint.EDIT=EDIT
+sharewhereiam.chat.sharewaypoint.EDIT.desc=Open this Waypoint in Editor
