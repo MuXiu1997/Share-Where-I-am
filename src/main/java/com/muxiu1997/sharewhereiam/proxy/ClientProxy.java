@@ -1,6 +1,7 @@
 package com.muxiu1997.sharewhereiam.proxy;
 
 import com.muxiu1997.sharewhereiam.command.CommandSaveWaypoint;
+import com.muxiu1997.sharewhereiam.command.CommandShareWhereIAm;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.client.ClientCommandHandler;
 
@@ -10,5 +11,6 @@ public class ClientProxy extends CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
         ClientCommandHandler.instance.registerCommand(new CommandSaveWaypoint());
+        ClientCommandHandler.instance.registerCommand(new CommandShareWhereIAm());
     }
 }

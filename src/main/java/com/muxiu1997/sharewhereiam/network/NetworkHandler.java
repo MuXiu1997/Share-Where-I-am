@@ -18,8 +18,7 @@ import io.netty.buffer.Unpooled;
 
 
 public class NetworkHandler {
-
-    public static NetworkHandler instance;
+    public static NetworkHandler instance = new NetworkHandler();
 
     private final String CHANNEL_NAME = Tags.MODID;
     private final FMLEventChannel eventChannel;

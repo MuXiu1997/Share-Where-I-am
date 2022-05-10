@@ -3,6 +3,7 @@ jm.waypoint.share=Share
 sharewhereiam.command.savewaypoint.usage=Usage: /savewaypoint <waypoint code> [neet to open editor? default: true]
 sharewhereiam.command.savewaypoint.success=Waypoint saved
 sharewhereiam.command.savewaypoint.exists=Waypoint exists, can't save
+sharewhereiam.command.sharewhereiam.usage=Usage: /sharewhereiam
 
 sharewhereiam.chat.sharewaypoint.sharedawaypoint=shared a waypoint:
 sharewhereiam.chat.sharewaypoint.SAVE=SAVE
