@@ -33,6 +33,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
         final List<String> mixins = new ArrayList<>(2);
         mixins.add("journeymap.MixinWaypointManagerItem");
         mixins.add("journeymap.MixinWaypointStore");
+        mixins.add("journeymap.RenderWaypointBeaconMixin");
         return mixins;
     }
 

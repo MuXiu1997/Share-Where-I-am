@@ -2,15 +2,20 @@ package com.muxiu1997.sharewhereiam.proxy;
 
 import com.muxiu1997.sharewhereiam.command.CommandSaveWaypoint;
 import com.muxiu1997.sharewhereiam.command.CommandShareWhereIAm;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import com.muxiu1997.sharewhereiam.command.CommandToggleTempBeacon;
+import com.muxiu1997.sharewhereiam.journeymap.WaypointManager;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.common.MinecraftForge;
 
 @SuppressWarnings("unused")
 public class ClientProxy extends CommonProxy {
     @Override
-    public void preInit(FMLPreInitializationEvent event) {
-        super.preInit(event);
+    public void init(FMLInitializationEvent event) {
+        super.init(event);
         ClientCommandHandler.instance.registerCommand(new CommandSaveWaypoint());
         ClientCommandHandler.instance.registerCommand(new CommandShareWhereIAm());
+        ClientCommandHandler.instance.registerCommand(new CommandToggleTempBeacon());
+        MinecraftForge.EVENT_BUS.register(WaypointManager.instance);
     }
 }

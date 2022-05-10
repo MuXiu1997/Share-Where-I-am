@@ -29,7 +29,7 @@ public class ChatShareWaypoint {
         chatPartB.appendText(" ");
         chatPartB.appendSibling(new ChatComponentText(String.format("(%d, %d, %d)", waypoint.getX(), waypoint.getY(), waypoint.getZ())).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GRAY)));
         chatPartB.appendText(" ");
-        final String waypointBase64 = Base64.getEncoder().encodeToString(waypoint.toString().getBytes(StandardCharsets.UTF_8));
+        final String waypointBase64 = WaypointBase64.toBase64(waypoint);
         chatPartB.appendSibling(
             new ChatComponentText("[" + StatCollector.translateToLocal("sharewhereiam.chat.sharewaypoint.SAVE") + "]")
                 .setChatStyle(
@@ -49,6 +49,17 @@ public class ChatShareWaypoint {
                         .setColor(EnumChatFormatting.BLUE)
                         .setChatHoverEvent(new net.minecraft.event.HoverEvent(net.minecraft.event.HoverEvent.Action.SHOW_TEXT, new ChatComponentText(StatCollector.translateToLocal("sharewhereiam.chat.sharewaypoint.EDIT.desc"))))
                         .setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/savewaypoint " + waypointBase64))
+                )
+        );
+        chatPartB.appendText(" ");
+        chatPartB.appendSibling(
+            new ChatComponentText("["+ StatCollector.translateToLocal("sharewhereiam.chat.sharewaypoint.EnableOrDisable") + "]")
+                .setChatStyle(
+                    new ChatStyle()
+                        .setBold(true)
+                        .setColor(EnumChatFormatting.BLUE)
+                        .setChatHoverEvent(new net.minecraft.event.HoverEvent(net.minecraft.event.HoverEvent.Action.SHOW_TEXT, new ChatComponentText(StatCollector.translateToLocal("sharewhereiam.chat.sharewaypoint.EnableOrDisable.desc"))))
+                        .setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/toggletempbeacon " + waypointBase64))
                 )
         );
         player.addChatComponentMessage(chatPartA);

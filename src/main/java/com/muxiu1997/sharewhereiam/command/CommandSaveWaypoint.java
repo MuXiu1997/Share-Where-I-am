@@ -1,6 +1,7 @@
 package com.muxiu1997.sharewhereiam.command;
 
 import com.muxiu1997.sharewhereiam.interfaces.IMixinWaypointStore;
+import com.muxiu1997.sharewhereiam.util.WaypointBase64;
 import journeymap.client.model.Waypoint;
 import journeymap.client.ui.UIManager;
 import journeymap.client.waypoint.WaypointStore;
@@ -55,9 +56,7 @@ public class CommandSaveWaypoint extends CommandBase {
         if (args.length < 1) throw new CommandException("sharewhereiam.command.savewaypoint.usage");
         final Waypoint waypoint;
         try {
-            String waypointCode = args[0];
-            final String waypointJSON = new String(Base64.getDecoder().decode(waypointCode), StandardCharsets.UTF_8);
-            waypoint = Waypoint.fromString(waypointJSON);
+            waypoint = WaypointBase64.fromBase64(args[0]);
         } catch (Exception ignored) {
             throw new CommandException("sharewhereiam.command.savewaypoint.usage");
         }

@@ -16,7 +16,7 @@ public class ShareWhereIAm {
     public static CommonProxy proxy;
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        proxy.preInit(event);
+    public void init(FMLInitializationEvent event) {
+        proxy.init(event);
     }
 }
