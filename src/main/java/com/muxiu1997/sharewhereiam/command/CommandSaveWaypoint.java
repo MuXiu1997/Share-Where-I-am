@@ -12,9 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-
 public class CommandSaveWaypoint extends CommandBase {
     @Override
     public String getCommandName() {

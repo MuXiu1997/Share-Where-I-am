@@ -1,12 +1,21 @@
 package com.muxiu1997.sharewhereiam.mixinplugin;
 
+import com.google.common.io.Files;
+import cpw.mods.fml.relauncher.FMLLaunchHandler;
+import net.minecraft.launchwrapper.Launch;
 import org.spongepowered.asm.lib.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
+import ru.timeconqueror.spongemixins.MinecraftURLClassPath;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import static java.nio.file.Files.walk;
 
 public class MixinPlugin implements IMixinConfigPlugin {
 
@@ -30,11 +39,40 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public List<String> getMixins() {
-        final List<String> mixins = new ArrayList<>(2);
-        mixins.add("journeymap.MixinWaypointManagerItem");
-        mixins.add("journeymap.MixinWaypointStore");
-        mixins.add("journeymap.RenderWaypointBeaconMixin");
+        final File journeyMapModJar = findJourneyMapModJar();
+        if (journeyMapModJar == null) return null;
+        if (!journeyMapModJar.exists()) return null;
+        try {
+            MinecraftURLClassPath.addJar(journeyMapModJar);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        final List<String> mixins = new ArrayList<>(3);
+        if (FMLLaunchHandler.side().isClient()) {
+            mixins.add("journeymap.MixinWaypointManagerItem");
+            mixins.add("journeymap.MixinWaypointStore");
+            mixins.add("journeymap.MixinRenderWaypointBeacon");
+        }
         return mixins;
+    }
+
+    private static File findJourneyMapModJar() {
+        try {
+            return walk(new File(Launch.minecraftHome, "mods/").toPath())
+                .filter(path -> {
+                    final String pathString = path.toString();
+                    final String nameLowerCase = Files.getNameWithoutExtension(pathString).toLowerCase();
+                    final String fileExtension = Files.getFileExtension(pathString);
+                    return nameLowerCase.startsWith("journeymap-1.7.10") && "jar".equals(fileExtension);
+                })
+                .map(Path::toFile)
+                .findFirst()
+                .orElse(null);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

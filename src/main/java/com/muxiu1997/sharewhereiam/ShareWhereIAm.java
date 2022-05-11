@@ -3,7 +3,7 @@ package com.muxiu1997.sharewhereiam;
 import com.muxiu1997.sharewhereiam.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,7 +16,7 @@ public class ShareWhereIAm {
     public static CommonProxy proxy;
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
-        proxy.init(event);
+    public void init(FMLPostInitializationEvent event) {
+        proxy.postInit(event);
     }
 }

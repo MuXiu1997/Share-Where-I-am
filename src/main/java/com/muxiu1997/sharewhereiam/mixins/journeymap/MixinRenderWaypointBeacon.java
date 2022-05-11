@@ -12,18 +12,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @SuppressWarnings("UnusedMixin")
 @Mixin(RenderWaypointBeacon.class)
-public class RenderWaypointBeaconMixin {
+public abstract class MixinRenderWaypointBeacon {
 
     @Shadow(remap = false)
     static Minecraft mc;
 
     @Shadow(remap = false)
-    static void doRender(Waypoint waypoint) {
-        throw new IllegalStateException("Mixin failed to shadow doRender()");
-    }
+    static void doRender(Waypoint waypoint) {}
 
-    @Inject(method = "renderAll", at = @At(value = "INVOKE", target = "Ljourneymap/client/waypoint/WaypointStore;instance()Ljourneymap/client/waypoint/WaypointStore;"), remap = false, require = 1)
-    private static void onRenderAll(CallbackInfo callbackInfo) {
+    @Inject(method = "renderAll", at = @At(value = "RETURN", remap = false), remap = false, require = 1)
+    private static void inject_renderAll(CallbackInfo callbackInfo) {
         if (WaypointManager.instance.hasActiveWaypoint()) {
             final Waypoint waypoint = WaypointManager.instance.getWaypoint();
             if (waypoint.getDimensions().contains(mc.thePlayer.dimension)) {

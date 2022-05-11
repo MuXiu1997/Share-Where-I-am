@@ -11,9 +11,6 @@ import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-
 @SideOnly(Side.CLIENT)
 public class ChatShareWaypoint {
     public static void send(String playerName, Waypoint waypoint) {
