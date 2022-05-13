@@ -53,6 +53,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
             mixins.add("journeymap.MixinWaypointManagerItem");
             mixins.add("journeymap.MixinWaypointStore");
             mixins.add("journeymap.MixinRenderWaypointBeacon");
+            mixins.add("journeymap.MixinFullscreen");
         }
         return mixins;
     }

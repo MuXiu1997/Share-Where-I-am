@@ -1,10 +1,13 @@
 package com.muxiu1997.sharewhereiam.util;
 
+import com.muxiu1997.sharewhereiam.network.MessageStartShareWaypoint;
+import com.muxiu1997.sharewhereiam.network.NetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import journeymap.client.model.Waypoint;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.event.ClickEvent;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
@@ -12,8 +15,14 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
 @SideOnly(Side.CLIENT)
-public class ChatShareWaypoint {
-    public static void send(String playerName, Waypoint waypoint) {
+public class ShareWaypointUtil {
+    public static void shareLocation(EntityPlayer player) {
+        final Waypoint waypoint = Waypoint.of(player);
+        waypoint.setName(StatCollector.translateToLocal("sharewhereiam.text.default_waypoint_name"));
+        NetworkHandler.INSTANCE.sendToServer(new MessageStartShareWaypoint(player.getDisplayName(), waypoint));
+    }
+
+    public static void addShareWaypointChat(String playerName, Waypoint waypoint) {
         final EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
         final ChatComponentText chatPartA = new ChatComponentText("");
         chatPartA.appendSibling(new ChatComponentText("[JourneyMap]").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.YELLOW)));
@@ -39,7 +48,7 @@ public class ChatShareWaypoint {
         );
         chatPartB.appendText(" ");
         chatPartB.appendSibling(
-            new ChatComponentText("["+ StatCollector.translateToLocal("sharewhereiam.chat.sharewaypoint.EDIT") + "]")
+            new ChatComponentText("[" + StatCollector.translateToLocal("sharewhereiam.chat.sharewaypoint.EDIT") + "]")
                 .setChatStyle(
                     new ChatStyle()
                         .setBold(true)
@@ -50,7 +59,7 @@ public class ChatShareWaypoint {
         );
         chatPartB.appendText(" ");
         chatPartB.appendSibling(
-            new ChatComponentText("["+ StatCollector.translateToLocal("sharewhereiam.chat.sharewaypoint.EnableOrDisable") + "]")
+            new ChatComponentText("[" + StatCollector.translateToLocal("sharewhereiam.chat.sharewaypoint.EnableOrDisable") + "]")
                 .setChatStyle(
                     new ChatStyle()
                         .setBold(true)

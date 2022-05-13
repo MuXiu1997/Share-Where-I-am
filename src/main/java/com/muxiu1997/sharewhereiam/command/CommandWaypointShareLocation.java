@@ -1,13 +1,10 @@
 package com.muxiu1997.sharewhereiam.command;
 
 import com.muxiu1997.sharewhereiam.command.base.CommandWaypointBase;
-import com.muxiu1997.sharewhereiam.network.MessageStartShareWaypoint;
-import com.muxiu1997.sharewhereiam.network.NetworkHandler;
-import journeymap.client.model.Waypoint;
+import com.muxiu1997.sharewhereiam.util.ShareWaypointUtil;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.StatCollector;
 
 public class CommandWaypointShareLocation extends CommandWaypointBase {
 
@@ -22,8 +19,6 @@ public class CommandWaypointShareLocation extends CommandWaypointBase {
         ensureArgsLength(args, 0);
         assert sender instanceof EntityPlayer;
         EntityPlayer player = (EntityPlayer) sender;
-        final Waypoint waypoint = Waypoint.of(player);
-        waypoint.setName(StatCollector.translateToLocal(getCommandLocalisationKey("default_waypoint_name")));
-        NetworkHandler.INSTANCE.sendToServer(new MessageStartShareWaypoint(player.getDisplayName(), waypoint));
+        ShareWaypointUtil.shareLocation(player);
     }
 }

@@ -1,10 +1,7 @@
-jm.waypoint.share=Share
-
 sharewhereiam.command.savewaypoint.usage=Usage: /savewaypoint <waypoint code> [neet to open editor? default: true]
 sharewhereiam.command.savewaypoint.success=Waypoint saved
 sharewhereiam.command.savewaypoint.exists=Waypoint exists, can't save
 sharewhereiam.command.sharewhereiam.usage=Usage: /sharewhereiam
-sharewhereiam.command.sharewhereiam.default_waypoint_name=Current Location
 sharewhereiam.command.toggletempbeacon.usage=Usage: /toggletempbeacon [waypoint code]
 
 sharewhereiam.commanderror.INVALID_WAYPOINT_CODE=Invalid waypoint code
@@ -16,3 +13,10 @@ sharewhereiam.chat.sharewaypoint.EDIT=EDIT
 sharewhereiam.chat.sharewaypoint.EDIT.desc=Open this Waypoint in Editor
 sharewhereiam.chat.sharewaypoint.EnableOrDisable=Enable/Disable
 sharewhereiam.chat.sharewaypoint.EnableOrDisable.desc=Enable/Disable as Temporary Beacon
+
+sharewhereiam.key.share.name=Share
+sharewhereiam.key.share.category=Share Where I am
+
+sharewhereiam.text.default_waypoint_name=Current Location
+
+jm.waypoint.share=Share

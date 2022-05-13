@@ -1,6 +1,6 @@
 package com.muxiu1997.sharewhereiam.mixins.journeymap;
 
-import com.muxiu1997.sharewhereiam.journeymap.WaypointManager;
+import com.muxiu1997.sharewhereiam.integration.journeymap.WaypointManager;
 import journeymap.client.model.Waypoint;
 import journeymap.client.render.ingame.RenderWaypointBeacon;
 import net.minecraft.client.Minecraft;
@@ -24,6 +24,7 @@ public abstract class MixinRenderWaypointBeacon {
     private static void inject_renderAll(CallbackInfo callbackInfo) {
         if (WaypointManager.INSTANCE.hasActiveWaypoint()) {
             final Waypoint waypoint = WaypointManager.INSTANCE.getWaypoint();
+            assert waypoint != null;
             if (waypoint.getDimensions().contains(mc.thePlayer.dimension)) {
                 doRender(waypoint);
             }

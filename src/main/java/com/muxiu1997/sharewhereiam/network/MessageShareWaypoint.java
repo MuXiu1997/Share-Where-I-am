@@ -1,6 +1,6 @@
 package com.muxiu1997.sharewhereiam.network;
 
-import com.muxiu1997.sharewhereiam.util.ChatShareWaypoint;
+import com.muxiu1997.sharewhereiam.util.ShareWaypointUtil;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -40,7 +40,7 @@ public class MessageShareWaypoint implements IMessage {
         @Nullable
         public IMessage onMessage(MessageShareWaypoint message, MessageContext ctx) {
             if (ctx.side.isServer()) return null;
-            ChatShareWaypoint.send(message.playerName, message.waypoint);
+            ShareWaypointUtil.addShareWaypointChat(message.playerName, message.waypoint);
             return null;
         }
     }
