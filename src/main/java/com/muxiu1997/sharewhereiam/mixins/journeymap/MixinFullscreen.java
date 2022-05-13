@@ -13,6 +13,7 @@ import journeymap.client.ui.fullscreen.Fullscreen;
 import journeymap.client.ui.fullscreen.MapChat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.util.StatCollector;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -45,7 +46,13 @@ public abstract class MixinFullscreen extends JmUI {
             @Nullable final Waypoint waypoint = VPWaypointUtil.getHoveredWaypoint();
             if (waypoint == null) return;
             final EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-            NetworkHandler.INSTANCE.sendToServer(new MessageStartShareWaypoint(player.getDisplayName(), waypoint));
+            NetworkHandler.INSTANCE.sendToServer(
+                new MessageStartShareWaypoint(
+                    player.getDisplayName(),
+                    waypoint,
+                    StatCollector.translateToLocal("sharewhereiam.chat.sharewaypoint.additionalInformation.VP")
+                )
+            );
             callbackInfo.cancel();
         }
     }

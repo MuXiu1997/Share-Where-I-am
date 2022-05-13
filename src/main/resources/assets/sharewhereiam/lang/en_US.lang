@@ -13,6 +13,7 @@ sharewhereiam.chat.sharewaypoint.EDIT=EDIT
 sharewhereiam.chat.sharewaypoint.EDIT.desc=Open this Waypoint in Editor
 sharewhereiam.chat.sharewaypoint.EnableOrDisable=Enable/Disable
 sharewhereiam.chat.sharewaypoint.EnableOrDisable.desc=Enable/Disable as Temporary Beacon
+sharewhereiam.chat.sharewaypoint.additionalInformation.VP=This is a VisualProspecting Waypoint, you still need to add the Waypoint to the VP in the way that the VP allows
 
 sharewhereiam.key.share.name=Share
 sharewhereiam.key.share.category=Share Where I am

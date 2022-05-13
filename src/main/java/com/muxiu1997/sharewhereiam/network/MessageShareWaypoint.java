@@ -14,25 +14,29 @@ public class MessageShareWaypoint implements IMessage {
 
     public String playerName;
     public Waypoint waypoint;
+    public String additionalInformation;
 
     public MessageShareWaypoint() {
     }
 
-    public MessageShareWaypoint(String playerName, Waypoint waypoint) {
+    public MessageShareWaypoint(String playerName, Waypoint waypoint, String additionalInformation) {
         this.playerName = playerName;
         this.waypoint = waypoint;
+        this.additionalInformation = additionalInformation;
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
         playerName = ByteBufUtils.readUTF8String(buf);
         waypoint = Waypoint.fromString(ByteBufUtils.readUTF8String(buf));
+        additionalInformation = ByteBufUtils.readUTF8String(buf);
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
         ByteBufUtils.writeUTF8String(buf, playerName);
         ByteBufUtils.writeUTF8String(buf, waypoint.toString());
+        ByteBufUtils.writeUTF8String(buf, additionalInformation);
     }
 
     public static class Handler implements IMessageHandler<MessageShareWaypoint, IMessage> {
@@ -40,7 +44,7 @@ public class MessageShareWaypoint implements IMessage {
         @Nullable
         public IMessage onMessage(MessageShareWaypoint message, MessageContext ctx) {
             if (ctx.side.isServer()) return null;
-            ShareWaypointUtil.addShareWaypointChat(message.playerName, message.waypoint);
+            ShareWaypointUtil.addShareWaypointChat(message.playerName, message.waypoint, message.additionalInformation);
             return null;
         }
     }
