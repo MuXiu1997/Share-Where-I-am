@@ -12,7 +12,10 @@ import net.minecraft.event.ClickEvent;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.util.StatCollector;
+
+import java.util.Optional;
 
 @SideOnly(Side.CLIENT)
 public class ShareWaypointUtil {
@@ -22,7 +25,7 @@ public class ShareWaypointUtil {
         NetworkHandler.INSTANCE.sendToServer(new MessageStartShareWaypoint(player.getDisplayName(), waypoint));
     }
 
-    public static void addShareWaypointChat(String playerName, Waypoint waypoint) {
+    public static void addShareWaypointChat(String playerName, Waypoint waypoint, String additionalInformation) {
         final EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
         final ChatComponentText chatPartA = new ChatComponentText("");
         chatPartA.appendSibling(new ChatComponentText("[JourneyMap]").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.YELLOW)));
@@ -68,7 +71,11 @@ public class ShareWaypointUtil {
                         .setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/toggletempbeacon " + waypointBase64))
                 )
         );
+        final Optional<IChatComponent> chatPartC = Optional.ofNullable(additionalInformation)
+            .filter(s -> !s.isEmpty())
+            .map(s -> new ChatComponentText(s).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GRAY)));
         player.addChatComponentMessage(chatPartA);
         player.addChatComponentMessage(chatPartB);
+        chatPartC.ifPresent(player::addChatComponentMessage);
     }
 }
