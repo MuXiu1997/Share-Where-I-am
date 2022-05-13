@@ -8,13 +8,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 @SideOnly(Side.CLIENT)
 public class WaypointManager {
-    public static WaypointManager instance = new WaypointManager();
 
+    public static WaypointManager INSTANCE = new WaypointManager();
+
+    @Nullable
     private Waypoint waypoint;
 
+    @Nullable
     public Waypoint getWaypoint() {
         return this.waypoint;
     }
@@ -39,7 +43,7 @@ public class WaypointManager {
     public void onEvent(EntityJoinWorldEvent event) {
         if (event.world.isRemote) {
             if (event.entity instanceof EntityPlayer) {
-                WaypointManager.instance.clearActiveWaypoint();
+                WaypointManager.INSTANCE.clearActiveWaypoint();
             }
         }
     }

@@ -22,8 +22,8 @@ public abstract class MixinRenderWaypointBeacon {
 
     @Inject(method = "renderAll", at = @At(value = "RETURN", remap = false), remap = false, require = 1)
     private static void inject_renderAll(CallbackInfo callbackInfo) {
-        if (WaypointManager.instance.hasActiveWaypoint()) {
-            final Waypoint waypoint = WaypointManager.instance.getWaypoint();
+        if (WaypointManager.INSTANCE.hasActiveWaypoint()) {
+            final Waypoint waypoint = WaypointManager.INSTANCE.getWaypoint();
             if (waypoint.getDimensions().contains(mc.thePlayer.dimension)) {
                 doRender(waypoint);
             }

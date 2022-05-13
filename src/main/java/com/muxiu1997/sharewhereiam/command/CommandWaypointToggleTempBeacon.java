@@ -18,10 +18,10 @@ public class CommandWaypointToggleTempBeacon extends CommandWaypointBase {
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
         ensureArgsLength(args, 0, 1);
         if (args.length == 0) {
-            WaypointManager.instance.clearActiveWaypoint();
+            WaypointManager.INSTANCE.clearActiveWaypoint();
             return;
         }
         Waypoint waypoint = parseWaypoint(args[0]);
-        WaypointManager.instance.toggleActiveWaypoint(waypoint);
+        WaypointManager.INSTANCE.toggleActiveWaypoint(waypoint);
     }
 }
