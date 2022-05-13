@@ -1,7 +1,7 @@
 package com.muxiu1997.sharewhereiam.command;
 
 import com.muxiu1997.sharewhereiam.command.base.CommandWaypointBase;
-import com.muxiu1997.sharewhereiam.mixins.journeymap.interfaces.IMixinWaypointStore;
+import com.muxiu1997.sharewhereiam.mixininterfaces.IMixinWaypointStore;
 import journeymap.client.model.Waypoint;
 import journeymap.client.ui.UIManager;
 import journeymap.client.waypoint.WaypointStore;

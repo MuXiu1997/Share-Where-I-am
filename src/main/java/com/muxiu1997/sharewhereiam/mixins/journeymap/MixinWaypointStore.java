@@ -1,7 +1,7 @@
 package com.muxiu1997.sharewhereiam.mixins.journeymap;
 
 import com.google.common.cache.Cache;
-import com.muxiu1997.sharewhereiam.interfaces.IMixinWaypointStore;
+import com.muxiu1997.sharewhereiam.mixininterfaces.IMixinWaypointStore;
 import journeymap.client.model.Waypoint;
 import journeymap.client.waypoint.WaypointStore;
 import org.spongepowered.asm.mixin.Final;
