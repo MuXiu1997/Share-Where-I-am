@@ -4,7 +4,10 @@ sharewhereiam.command.savewaypoint.usage=Usage: /savewaypoint <waypoint code> [n
 sharewhereiam.command.savewaypoint.success=Waypoint saved
 sharewhereiam.command.savewaypoint.exists=Waypoint exists, can't save
 sharewhereiam.command.sharewhereiam.usage=Usage: /sharewhereiam
+sharewhereiam.command.sharewhereiam.default_waypoint_name=Current Location
 sharewhereiam.command.toggletempbeacon.usage=Usage: /toggletempbeacon [waypoint code]
+
+sharewhereiam.commanderror.INVALID_WAYPOINT_CODE=Invalid waypoint code
 
 sharewhereiam.chat.sharewaypoint.sharedawaypoint=shared a waypoint:
 sharewhereiam.chat.sharewaypoint.SAVE=SAVE
