@@ -1,11 +1,8 @@
-package com.muxiu1997.sharewhereiam.journeymap;
+package com.muxiu1997.sharewhereiam.integration.journeymap;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import journeymap.client.model.Waypoint;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -39,12 +36,4 @@ public class WaypointManager {
         this.waypoint = waypoint;
     }
 
-    @SubscribeEvent
-    public void onEvent(EntityJoinWorldEvent event) {
-        if (event.world.isRemote) {
-            if (event.entity instanceof EntityPlayer) {
-                WaypointManager.INSTANCE.clearActiveWaypoint();
-            }
-        }
-    }
 }

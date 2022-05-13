@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 public class ShareWhereIAm {
 
     @SuppressWarnings("unused")
-    private static final Logger logger = LogManager.getLogger(Tags.MODID);
+    public static final Logger logger = LogManager.getLogger(Tags.MODID);
 
     @SidedProxy(clientSide = Tags.GROUPNAME + ".proxy.ClientProxy", serverSide = Tags.GROUPNAME + ".proxy.CommonProxy")
     public static CommonProxy proxy;
