@@ -1,36 +1,29 @@
 package com.muxiu1997.sharewhereiam.command;
 
+import com.muxiu1997.sharewhereiam.command.base.CommandWaypointBase;
 import com.muxiu1997.sharewhereiam.network.NetworkHandler;
 import com.muxiu1997.sharewhereiam.network.packet.PacketStartShareWaypoint;
 import journeymap.client.model.Waypoint;
-import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.StatCollector;
 
-public class CommandShareWhereIAm extends CommandBase {
-    @Override
-    public String getCommandName() {
-        return "sharewhereiam";
-    }
+public class CommandWaypointShareLocation extends CommandWaypointBase {
 
-    @Override
-    public String getCommandUsage(ICommandSender sender) {
-        return "sharewhereiam.command.sharewhereiam.usage";
+    public static CommandWaypointShareLocation INSTANCE = new CommandWaypointShareLocation();
+
+    public CommandWaypointShareLocation() {
+        super("sharewhereiam");
     }
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
-        if (args.length != 0) throw new CommandException("sharewhereiam.command.sharewhereiam.usage");
-        if (!(sender instanceof EntityPlayer)) return;
+        ensureArgsLength(args, 0);
+        assert sender instanceof EntityPlayer;
         EntityPlayer player = (EntityPlayer) sender;
         final Waypoint waypoint = Waypoint.of(player);
-        waypoint.setName("Current Location");
+        waypoint.setName(StatCollector.translateToLocal(getCommandLocalisationKey("default_waypoint_name")));
         NetworkHandler.instance.sendToServer(new PacketStartShareWaypoint(player.getDisplayName(), waypoint));
-    }
-
-    @Override
-    public boolean canCommandSenderUseCommand(ICommandSender sender) {
-        return true;
     }
 }
