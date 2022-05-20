@@ -1,6 +1,12 @@
 dependencies {
+    compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30'
+
     compileOnly('com.github.GTNewHorizons:NotEnoughItems:2.2.6-GTNH:dev') { transitive = false }
     compileOnly('curse.maven:journeymap-32274:2367915') { transitive = false }
 
     compileOnly('com.github.GTNewHorizons:VisualProspecting:1.0.28:dev') { transitive = false }
+
+    implementation 'com.google.devtools.ksp:symbol-processing-api:1.5.30-1.0.0'
+    implementation project(':localization-generator')
+    ksp project(':localization-generator')
 }
