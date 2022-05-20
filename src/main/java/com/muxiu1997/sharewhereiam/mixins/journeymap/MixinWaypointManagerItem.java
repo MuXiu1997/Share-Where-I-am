@@ -1,8 +1,7 @@
 package com.muxiu1997.sharewhereiam.mixins.journeymap;
 
+import com.muxiu1997.sharewhereiam.localization.Lang;
 import com.muxiu1997.sharewhereiam.network.MessageStartShareWaypoint;
-import com.muxiu1997.sharewhereiam.network.NetworkHandler;
-import journeymap.client.Constants;
 import journeymap.client.model.Waypoint;
 import journeymap.client.ui.component.Button;
 import journeymap.client.ui.waypoint.WaypointManagerItem;
@@ -14,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import static com.muxiu1997.sharewhereiam.network.NetworkHandler.network;
 
 
 @SuppressWarnings("UnusedMixin")
@@ -38,7 +39,7 @@ public abstract class MixinWaypointManagerItem {
         remap = false
     )
     private Button[] redirect_init(Button[] buttons) {
-        this.buttonShare = new Button(Constants.getString("jm.waypoint.share"));
+        this.buttonShare = new Button(Lang.TEXT_JM_WAYPOINT_BUTTON.invoke());
         Button[] newButtons = new Button[buttons.length + 1];
         System.arraycopy(buttons, 0, newButtons, 1, buttons.length);
         newButtons[0] = this.buttonShare;
@@ -59,7 +60,7 @@ public abstract class MixinWaypointManagerItem {
     private void inject_clickScrollable(int mouseX, int mouseY, CallbackInfoReturnable<Boolean> mouseOver) {
         if (!mouseOver.getReturnValue() && this.buttonShare.mouseOver(mouseX, mouseY)) {
             final EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-            NetworkHandler.INSTANCE.sendToServer(new MessageStartShareWaypoint(player.getDisplayName(), this.waypoint));
+            network.sendToServer(new MessageStartShareWaypoint(player.getDisplayName(), this.waypoint));
             mouseOver.setReturnValue(true);
         }
     }

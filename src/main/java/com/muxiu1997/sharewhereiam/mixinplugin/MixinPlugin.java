@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import ru.timeconqueror.spongemixins.MinecraftURLClassPath;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +57,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
         return mixins;
     }
 
+    @SuppressWarnings({"UnstableApiUsage", "resource"})
     private static File findJourneyMapModJar() {
         try {
             return walk(new File(Launch.minecraftHome, "mods/").toPath())
@@ -70,7 +70,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
                 .map(Path::toFile)
                 .findFirst()
                 .orElse(null);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
