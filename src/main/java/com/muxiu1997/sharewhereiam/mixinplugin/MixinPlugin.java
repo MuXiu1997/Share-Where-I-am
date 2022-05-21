@@ -47,7 +47,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
             e.printStackTrace();
             return null;
         }
-        final List<String> mixins = new ArrayList<>(3);
+        final List<String> mixins = new ArrayList<>(4);
         if (FMLLaunchHandler.side().isClient()) {
             mixins.add("journeymap.MixinWaypointManagerItem");
             mixins.add("journeymap.MixinWaypointStore");

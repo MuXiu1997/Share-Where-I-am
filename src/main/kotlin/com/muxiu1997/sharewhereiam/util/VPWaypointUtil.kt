@@ -13,23 +13,19 @@ object VPWaypointUtil {
     @JvmStatic
     @Optional.Method(modid = VISUAL_PROSPECTING_MODID)
     fun getHoveredWaypoint(): Waypoint? {
+        val fieldHoveredDrawStep = ReflectionHelper.findField(
+            WaypointProviderLayerRenderer::class.java,
+            "hoveredDrawStep",
+        )
         for (layer in JourneyMapState.instance.renderers) {
-            if (layer is WaypointProviderLayerRenderer) {
-                val fieldHoveredDrawStep = ReflectionHelper.findField(
-                    WaypointProviderLayerRenderer::class.java, "hoveredDrawStep"
-                )
-                var hoveredDrawStep: ClickableDrawStep? = null
-                try {
-                    hoveredDrawStep = fieldHoveredDrawStep[layer] as ClickableDrawStep
-                } catch (ignored: Exception) {
-                }
-                if (hoveredDrawStep != null) {
-                    val waypoint = hoveredDrawStep.locationProvider.toWaypoint()
-                    if (waypoint != null) {
-                        return waypoint.getJMWaypoint()
-                    }
-                }
+            if (layer !is WaypointProviderLayerRenderer) continue
+            val hoveredDrawStep = try {
+                fieldHoveredDrawStep[layer] as ClickableDrawStep
+            } catch (ignored: Exception) {
+                continue
             }
+            val waypoint = hoveredDrawStep.locationProvider?.toWaypoint() ?: continue
+            return waypoint.getJMWaypoint()
         }
         return null
     }
