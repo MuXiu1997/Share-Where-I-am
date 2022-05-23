@@ -13,10 +13,10 @@ object CommandWaypointToggleTempBeacon : CommandWaypointBase("toggletempbeacon")
     override fun processCommand(sender: ICommandSender, args: Array<String>) {
         ensureArgsLength(args, 0, 1)
         if (args.isEmpty()) {
-            WaypointManager.clearActiveWaypoint()
+            WaypointManager.clearActiveTempBeacon()
             return
         }
         val waypoint = parseWaypoint(args[0])
-        WaypointManager.toggleActiveWaypoint(waypoint)
+        WaypointManager.toggleActiveTempBeacon(waypoint)
     }
 }

@@ -3,11 +3,13 @@ package com.muxiu1997.sharewhereiam.util
 import com.muxiu1997.sharewhereiam.localization.Lang
 import com.muxiu1997.sharewhereiam.network.MessageShareWaypoint
 import com.muxiu1997.sharewhereiam.network.network
-import com.muxiu1997.sharewhereiam.util.WaypointBase64.toBase64
 import cpw.mods.fml.relauncher.Side
 import cpw.mods.fml.relauncher.SideOnly
+import journeymap.client.cartography.RGB
+import journeymap.client.cartography.RGB.WHITE_RGB
 import journeymap.client.model.Waypoint
 import net.minecraft.client.Minecraft
+import net.minecraft.client.entity.EntityClientPlayerMP
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.event.ClickEvent
 import net.minecraft.event.HoverEvent
@@ -15,13 +17,46 @@ import net.minecraft.util.ChatComponentText
 import net.minecraft.util.ChatStyle
 import net.minecraft.util.EnumChatFormatting
 import net.minecraft.util.IChatComponent
+import java.nio.charset.StandardCharsets
+import java.util.*
 
 @SideOnly(Side.CLIENT)
-object ShareWaypointUtil {
-    fun shareLocation(player: EntityPlayer) {
-        val waypoint = Waypoint.of(player)
-        waypoint.name = Lang.TEXT_DEFAULT_WAYPOINT_NAME()
-        network.sendToServer(MessageShareWaypoint(player.displayName, waypoint))
+object WaypointUtil {
+    fun waypointOfLocation(): PlayerWaypoint {
+        val player = Minecraft.getMinecraft().thePlayer
+        val waypoint = Waypoint.of(player).apply {
+            name = player.displayName
+            color = WHITE_RGB
+        }
+        return PlayerWaypoint(player, waypoint)
+    }
+
+    fun waypointOfRayTrace(): PlayerWaypoint {
+        val player = Minecraft.getMinecraft().thePlayer
+        val position = player.rayTrace(128.0, 1.0f)
+        val waypoint = Waypoint.at(
+            position.blockX,
+            position.blockY,
+            position.blockZ,
+            Waypoint.Type.Normal,
+            player.worldObj.provider.dimensionId
+        ).apply {
+            name = player.displayName
+            color = WHITE_RGB
+        }
+        return PlayerWaypoint(player, waypoint)
+    }
+
+    data class PlayerWaypoint(val player: EntityPlayer, val waypoint: Waypoint)
+
+    fun toBase64(waypoint: Waypoint): String {
+        val waypointJSON = waypoint.toString()
+        return Base64.getEncoder().encodeToString(waypointJSON.toByteArray(StandardCharsets.UTF_8))
+    }
+
+    fun fromBase64(base64: String?): Waypoint {
+        val waypointJSON = String(Base64.getDecoder().decode(base64), StandardCharsets.UTF_8)
+        return Waypoint.fromString(waypointJSON)
     }
 
     fun addShareWaypointChat(playerName: String, waypoint: Waypoint, additionalInformation: String?) {

@@ -1,7 +1,7 @@
 package com.muxiu1997.sharewhereiam.command.base
 
 import com.muxiu1997.sharewhereiam.command.CommandError
-import com.muxiu1997.sharewhereiam.util.WaypointBase64.fromBase64
+import com.muxiu1997.sharewhereiam.util.WaypointUtil.fromBase64
 import journeymap.client.model.Waypoint
 import net.minecraft.client.entity.AbstractClientPlayer
 import net.minecraft.command.CommandBase

@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.Side
 object NetworkLoader {
     fun load() {
         register(MessageShareWaypoint.Companion.Handler)
+        register(MessageMarkWaypoint.Companion.Handler)
     }
 
     private inline fun <reified REQ : IMessage?, REPLY : IMessage?> register(

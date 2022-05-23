@@ -6,6 +6,7 @@ import com.muxiu1997.sharewhereiam.integration.Mods;
 import com.muxiu1997.sharewhereiam.localization.Lang;
 import com.muxiu1997.sharewhereiam.network.MessageShareWaypoint;
 import com.muxiu1997.sharewhereiam.util.VPWaypointUtil;
+import com.muxiu1997.sharewhereiam.util.WaypointUtil;
 import journeymap.client.Constants;
 import journeymap.client.model.Waypoint;
 import journeymap.client.ui.component.JmUI;
@@ -49,8 +50,7 @@ public abstract class MixinFullscreen extends JmUI {
             final EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
             network.sendToServer(
                 new MessageShareWaypoint(
-                    player.getDisplayName(),
-                    waypoint,
+                    new WaypointUtil.PlayerWaypoint(player, waypoint),
                     Lang.SHARE_WAYPOINT_VP.invoke()
                 )
             );
