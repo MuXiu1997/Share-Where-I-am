@@ -1,7 +1,7 @@
 package com.muxiu1997.sharewhereiam.util
 
 import com.muxiu1997.sharewhereiam.localization.Lang
-import com.muxiu1997.sharewhereiam.network.MessageStartShareWaypoint
+import com.muxiu1997.sharewhereiam.network.MessageShareWaypoint
 import com.muxiu1997.sharewhereiam.network.network
 import com.muxiu1997.sharewhereiam.util.WaypointBase64.toBase64
 import cpw.mods.fml.relauncher.Side
@@ -21,7 +21,7 @@ object ShareWaypointUtil {
     fun shareLocation(player: EntityPlayer) {
         val waypoint = Waypoint.of(player)
         waypoint.name = Lang.TEXT_DEFAULT_WAYPOINT_NAME()
-        network.sendToServer(MessageStartShareWaypoint(player.displayName, waypoint))
+        network.sendToServer(MessageShareWaypoint(player.displayName, waypoint))
     }
 
     fun addShareWaypointChat(playerName: String, waypoint: Waypoint, additionalInformation: String?) {

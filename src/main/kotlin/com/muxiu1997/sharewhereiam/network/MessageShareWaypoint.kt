@@ -18,7 +18,16 @@ class MessageShareWaypoint : IMessage {
     @Suppress("unused")
     constructor()
 
-    constructor(playerName: String, waypointJson: String, additionalInformation: String) {
+    @SideOnly(Side.CLIENT)
+    @JvmOverloads
+    constructor(playerName: String, waypoint: Waypoint, additionalInformation: String = "") : this(
+        playerName,
+        waypoint.toString(),
+        additionalInformation,
+    )
+
+    @JvmOverloads
+    constructor(playerName: String, waypointJson: String, additionalInformation: String = "") {
         this.playerName = playerName
         this.waypointJson = waypointJson
         this.additionalInformation = additionalInformation
@@ -37,10 +46,13 @@ class MessageShareWaypoint : IMessage {
     }
 
     companion object {
-        object Handler : IMessageHandler<MessageShareWaypoint, IMessage?> {
+        object Handler : IMessageHandler<MessageShareWaypoint, IMessage?>, IClientSideHandler, IServerSideHandler {
             override fun onMessage(message: MessageShareWaypoint, ctx: MessageContext): IMessage? {
-                if (ctx.side.isServer) return null
-                handleClientSideMessage(message)
+                when (ctx.side) {
+                    Side.CLIENT -> handleClientSideMessage(message)
+                    Side.SERVER -> handleServerSideMessage(message)
+                    else -> {}
+                }
                 return null
             }
 
@@ -51,6 +63,11 @@ class MessageShareWaypoint : IMessage {
                     Waypoint.fromString(message.waypointJson),
                     message.additionalInformation
                 )
+            }
+
+            @SideOnly(Side.SERVER)
+            fun handleServerSideMessage(message: MessageShareWaypoint) {
+                network.sendToAll(message)
             }
         }
     }

@@ -1,7 +1,7 @@
 package com.muxiu1997.sharewhereiam.mixins.journeymap;
 
 import com.muxiu1997.sharewhereiam.localization.Lang;
-import com.muxiu1997.sharewhereiam.network.MessageStartShareWaypoint;
+import com.muxiu1997.sharewhereiam.network.MessageShareWaypoint;
 import journeymap.client.model.Waypoint;
 import journeymap.client.ui.component.Button;
 import journeymap.client.ui.waypoint.WaypointManagerItem;
@@ -60,7 +60,7 @@ public abstract class MixinWaypointManagerItem {
     private void inject_clickScrollable(int mouseX, int mouseY, CallbackInfoReturnable<Boolean> mouseOver) {
         if (!mouseOver.getReturnValue() && this.buttonShare.mouseOver(mouseX, mouseY)) {
             final EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-            network.sendToServer(new MessageStartShareWaypoint(player.getDisplayName(), this.waypoint));
+            network.sendToServer(new MessageShareWaypoint(player.getDisplayName(), this.waypoint));
             mouseOver.setReturnValue(true);
         }
     }
