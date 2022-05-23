@@ -9,14 +9,20 @@ import cpw.mods.fml.relauncher.Side
 
 object NetworkLoader {
     fun load() {
-        register(MessageStartShareWaypoint.Companion.Handler)
-        register(MessageShareWaypoint.Companion.Handler)
+        registerServerSide(MessageStartShareWaypoint.Companion.Handler)
+        registerClientSide(MessageStartShareWaypoint.Companion.Handler)
+        registerClientSide(MessageShareWaypoint.Companion.Handler)
     }
 
-    private inline fun <reified REQ : IMessage?, REPLY : IMessage?> register(
+    private inline fun <reified REQ : IMessage?, REPLY : IMessage?> registerServerSide(
         messageHandler: IMessageHandler<REQ, REPLY>,
     ) {
         network.registerMessage(messageHandler, REQ::class.java, nextID++, Side.SERVER)
+    }
+
+    private inline fun <reified REQ : IMessage?, REPLY : IMessage?> registerClientSide(
+        messageHandler: IMessageHandler<REQ, REPLY>,
+    ) {
         network.registerMessage(messageHandler, REQ::class.java, nextID++, Side.CLIENT)
     }
 

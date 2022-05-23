@@ -8,7 +8,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
 
 open class CommonProxy {
-    fun preInit(event: FMLPreInitializationEvent) {
+    open fun preInit(event: FMLPreInitializationEvent) {
         LocalizationLoader.load()
     }
 
