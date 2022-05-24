@@ -2,6 +2,7 @@ package com.muxiu1997.sharewhereiam.event
 
 import com.muxiu1997.sharewhereiam.client.KeyShare
 import com.muxiu1997.sharewhereiam.integration.journeymap.WaypointManager
+import com.muxiu1997.sharewhereiam.integration.journeymap.WaypointMarker
 import com.muxiu1997.sharewhereiam.network.MessageMarkWaypoint
 import com.muxiu1997.sharewhereiam.network.MessageShareWaypoint
 import com.muxiu1997.sharewhereiam.network.network
@@ -15,6 +16,7 @@ import journeymap.client.cartography.RGB.WHITE_RGB
 import journeymap.client.model.Waypoint
 import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraftforge.client.event.RenderWorldLastEvent
 import net.minecraftforge.event.entity.EntityJoinWorldEvent
 import org.lwjgl.input.Keyboard
 
@@ -45,5 +47,11 @@ object EventHandler {
         } else {
             network.sendToServer(MessageMarkWaypoint(playerWaypoint))
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    fun handleRenderWorldLast(event: RenderWorldLastEvent) {
+        WaypointMarker.render(event)
     }
 }
