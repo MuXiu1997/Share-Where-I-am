@@ -6,11 +6,27 @@
 
 
 
-## Use
 
-You can share your `Waypoint` in your `Waypoint Manager` .
+## 1. Mark a position
+Using a shortcut (<kbd>INSERT</kbd> by default) you can mark the position you are currently looking at, the marker(`Beacon`) will be present for 3 seconds and other players will be able to see your marker.
 
-use the command `/sharewhereiam` or shortcut (<kbd>INSERT</kbd> by default) to share your current location.
+Or use a shortcut (<kbd>Shift</kbd> + <kbd>INSERT</kbd> by default) to mark where you are.
+
+![image-20220524183950102](README.assets/image-20220524183950102.png)
+
+
+
+## 2. Share a waypoint
+
+Using a shortcut (<kbd>Ctrl</kbd>+ <kbd>INSERT</kbd> by default) you can share the position you are looking at as a `Waypoint`.
+
+Or use a shortcut (<kbd>Ctrl</kbd>+ <kbd>Shift</kbd> + <kbd>INSERT</kbd> by default) to share where you are. The same effect can be achieved using the command `/sharewhereiam`
+![share-waypoint-message](README.assets/share-waypoint-message.png)
+
+_share waypoint message_
+
+------
+you can share your existing `Waypoint` in your `Waypoint Manager` :
 
 ![share-waypoint](README.assets/share-waypoint.png)
 
@@ -18,11 +34,7 @@ _<kbd>Share</kbd> button in the `Waypoint Manager` screen_
 
 ------
 
-![share-waypoint-message](README.assets/share-waypoint-message.png)
 
-_share waypoint message_
-
-------
 
 1. Other players can just save this `Waypoint` (click `[SAVE]`)
    <details>
