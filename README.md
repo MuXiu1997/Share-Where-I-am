@@ -12,7 +12,7 @@ Using a shortcut (<kbd>INSERT</kbd> by default) you can mark the position you ar
 
 Or use a shortcut (<kbd>Shift</kbd> + <kbd>INSERT</kbd> by default) to mark where you are.
 
-![image-20220524183950102](README.assets/image-20220524183950102.png)
+![CBD1E94EB20AE37F301DDEA1E3A256F8](README.assets/CBD1E94EB20AE37F301DDEA1E3A256F8.jpg)
 
 
 
